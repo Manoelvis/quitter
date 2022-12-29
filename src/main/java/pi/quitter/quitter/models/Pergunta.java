@@ -11,7 +11,7 @@ public class Pergunta {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String pergunta;
+	private String duvida;
 	private String descricao;
 
 	public Long getId() {
@@ -22,12 +22,12 @@ public class Pergunta {
 		this.id = id;
 	}
 
-	public String getPergunta() {
-		return pergunta;
+	public String getDuvida() {
+		return duvida;
 	}
 
-	public void setPergunta(String pergunta) {
-		this.pergunta = pergunta;
+	public void setDuvida(String duvida) {
+		this.duvida = duvida;
 	}
 
 	public String getDescricao() {
@@ -40,6 +40,6 @@ public class Pergunta {
 
 	@Override
 	public String toString() {
-		return "Pergunta [id=" + id + ", pergunta=" + pergunta + ", descricao=" + descricao + "]";
+		return "Pergunta [id=" + id + ", duvida=" + duvida + ", descricao=" + descricao + "]";
 	}
 }
