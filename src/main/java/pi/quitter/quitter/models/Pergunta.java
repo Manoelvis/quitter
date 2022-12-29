@@ -1,16 +1,33 @@
 package pi.quitter.quitter.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Pergunta {
 
-	private String pergunta;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String duvida;
 	private String descricao;
 
-	public String getPergunta() {
-		return pergunta;
+	public Long getId() {
+		return id;
 	}
 
-	public void setPergunta(String pergunta) {
-		this.pergunta = pergunta;
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getDuvida() {
+		return duvida;
+	}
+
+	public void setDuvida(String duvida) {
+		this.duvida = duvida;
 	}
 
 	public String getDescricao() {
@@ -19,5 +36,10 @@ public class Pergunta {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	@Override
+	public String toString() {
+		return "Pergunta [id=" + id + ", duvida=" + duvida + ", descricao=" + descricao + "]";
 	}
 }
