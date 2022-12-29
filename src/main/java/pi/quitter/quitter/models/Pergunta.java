@@ -37,4 +37,9 @@ public class Pergunta {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
+	@Override
+	public String toString() {
+		return "Pergunta [id=" + id + ", pergunta=" + pergunta + ", descricao=" + descricao + "]";
+	}
 }
