@@ -35,14 +35,37 @@
 							</div>
 							<div>
 								<button
-									class="light-green darken-4 waves-effect waves-light btn" type="submit">Adicionar Comentário</button>
-								<button class="red darken-4 waves-effect waves-light btn" type="reset">Limpar Campos</button>
+									class="light-green darken-4 waves-effect waves-light btn"
+									type="submit">Adicionar Comentário</button>
+								<button class="red darken-4 waves-effect waves-light btn"
+									type="reset">Limpar Campos</button>
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+		<div class="row">
+			<div class="col s12">
+				<div class="card">
+					<div class="card-content">
+						<table class="highlight">
+							<thead>
+								<tr>
+									<th>Comentário</th>
+									<th>Usuário</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="r : ${respostas}">
+									<td th:text="${r.comentario}">Comentário</td>
+									<td>Nome do Usuário</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
 </body>
 </html>

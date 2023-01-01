@@ -48,7 +48,7 @@ public class PerguntasController {
 	}
 
 	@GetMapping("/{id}")
-	public ModelAndView detalharPerguntas(@PathVariable Long id) {
+	public ModelAndView detalhar(@PathVariable Long id) {
 
 		ModelAndView md = new ModelAndView();
 		Optional<Pergunta> opt = pr.findById(id);
@@ -58,10 +58,13 @@ public class PerguntasController {
 			return md;
 		}
 
-		md.setViewName("perguntas/detalhesPergunta");
+		md.setViewName("perguntas/detalhes");
 		Pergunta pergunta = opt.get();
 
 		md.addObject("pergunta", pergunta);
+		
+		List<Resposta> repostas = rr.findByPergunta(pergunta);
+		md.addObject("respostas", repostas);
 
 		return md;
 	}
