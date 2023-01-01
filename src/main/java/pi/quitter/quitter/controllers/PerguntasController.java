@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import pi.quitter.quitter.models.Pergunta;
+import pi.quitter.quitter.models.Resposta;
 import pi.quitter.quitter.repositories.PerguntaRepository;
+import pi.quitter.quitter.repositories.RespostaRepository;
 
 @Controller
 @RequestMapping("/perguntas")
@@ -20,6 +22,8 @@ public class PerguntasController {
 
 	@Autowired
 	private PerguntaRepository pr;
+	@Autowired
+	private RespostaRepository rr;
 
 	@GetMapping("/form")
 	public String form() {
@@ -60,5 +64,23 @@ public class PerguntasController {
 		md.addObject("pergunta", pergunta);
 
 		return md;
+	}
+	
+	@PostMapping("/{idPergunta}")
+	public String adicionarResposta(@PathVariable Long idPergunta, Resposta resposta) {
+		
+		Optional<Pergunta> opt = pr.findById(idPergunta);
+		
+		if(opt.isEmpty()) {
+			
+			return "redirect:/perguntas";
+		}
+		
+		Pergunta pergunta = opt.get();
+		resposta.setPergunta(pergunta);
+		
+		rr.save(resposta);
+		
+		return "redirect:/perguntas/{idPergunta}";
 	}
 }
