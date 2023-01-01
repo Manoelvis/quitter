@@ -16,16 +16,14 @@
 		<table>
 			<thead>
 				<tr>
-					<th>Id</th>
+					<th>Usuário</th>
 					<th>Dúvida</th>
-					<th>Descrição</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="p : ${perguntas}">
-					<td th:text="${p.id}">Id</td>
-					<td th:text="${p.duvida}">Dúvida</td>
-					<td th:text="${p.descricao}">Descrição</td>
+					<td>Nome do Usuário</td>
+					<td><a th:href="@{/perguntas/{id}(id=${p.id})}"><span th:text="${p.duvida}">Dúvida</span></a></td>
 				</tr>
 			</tbody>
 		</table>
