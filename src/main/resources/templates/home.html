@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 <title>Quitter</title>
 </head>
 <body>
+	<div th:replace="~{menu :: menu-quitter}"></div>
+	<div class="container">
+
+		<h6>Vamo tirar 100 nessa parada!</h6>
+		<h6>Para dar mais sorte ainda, "Hello, World!"</h6>
+
+	</div>
 	<h1>Vamo tirar 100 nessa parada!</h1>
 	<h1>Para dar mais sorte ainda, "Hello, World!"</h1>
 	<h2>EU ACREDITO, DIA 10, VDB!</h2>
