@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<title>Lista de Dúvidas</title>
+</head>
+<body>
+	<div th:replace="~{menu :: menu-quitter}"></div>
+	<div class="container">
+
+		<h2>Bem-vindo ao Quitter!</h2>
+		<h3>Lista de Dúvidas</h3>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Dúvida</th>
+					<th>Descrição</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="p : ${perguntas}">
+					<td th:text="${p.id}">Id</td>
+					<td th:text="${p.duvida}">Dúvida</td>
+					<td th:text="${p.descricao}">Descrição</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
