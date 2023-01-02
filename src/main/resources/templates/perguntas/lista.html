@@ -2,8 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
 <title>Lista de Dúvidas</title>
 </head>
 <body>
@@ -26,7 +28,10 @@
 					<td>Nome do Usuário</td>
 					<td><a th:href="@{/perguntas/{id}(id=${p.id})}"><span
 							th:text="${p.duvida}">Dúvida</span></a></td>
-					<td><a th:href="@{/perguntas/{id}/remover(id=${p.id})}"><i class="material-icons">delete_forever</i></a></td>
+					<td><a th:href="@{/perguntas/{id}/selecionar(id=${p.id})}"><i
+							class="material-icons">edit</i></a> <a
+						th:href="@{/perguntas/{id}/remover(id=${p.id})}"><i
+							class="material-icons">delete_forever</i></a></td>
 				</tr>
 			</tbody>
 		</table>

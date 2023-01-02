@@ -11,20 +11,25 @@
 	<div class="container">
 
 		<h5>Adicione sua dúvida aqui.</h5>
-		<h6 class="red-text">Hora de Quisttionar!</h6>
 
 		<form action="/perguntas" method="post">
 			<div>
+				<input type="hidden" name="id" th:value="${pergunta.id}"
+					readonly="readonly">
+			</div>
+			<div>
 				<label class="black-text"><h6>Dúvida:</h6></label> <input
-					type="text" name="duvida">
+					type="text" name="duvida" th:value="${pergunta.duvida}">
 			</div>
 			<div>
 				<label class="black-text"><h6>Descrição da Dúvida:</h6></label> <input
-					type="text" name="descricao">
+					type="text" name="descricao" th:value="${pergunta.descricao}">
 			</div>
 			<div>
-				<button class="light-green darken-4 waves-effect waves-light btn" type="submit">Cadastrar Dúvida</button>
-				<button class="red darken-4 waves-effect waves-light btn" type="reset">Limpar Campos</button>
+				<button class="light-green darken-4 waves-effect waves-light btn"
+					type="submit">Cadastrar Dúvida</button>
+				<button class="red darken-4 waves-effect waves-light btn"
+					type="reset">Limpar Campos</button>
 			</div>
 		</form>
 	</div>

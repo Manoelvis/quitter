@@ -33,9 +33,16 @@
 				<div class="card">
 					<div class="card-content">
 						<span class="card-title">Adicionar um comentário:</span>
-						<form action="" method="post">
+						<form
+							th:action="@{/perguntas/{idPergunta}(idPergunta=${pergunta.id})}"
+							method="post">
 							<div>
-								<input type="text" name="comentario">
+								<input type="hidden" name="id" th:value="${resposta.id}"
+									readonly="readonly">
+							</div>
+							<div>
+								<input type="text" name="comentario"
+									th:value="${resposta.comentario}">
 							</div>
 							<div>
 								<button
@@ -66,6 +73,8 @@
 									<td th:text="${r.comentario}">Comentário</td>
 									<td>Nome do Usuário</td>
 									<td><a
+										th:href="@{/perguntas/{idPergunta}/respostas/{idResposta}/selecionar(idPergunta=${pergunta.id}, idResposta=${r.id})}"><i
+											class="material-icons">edit</i></a><a
 										th:href="@{/perguntas/{idPergunta}/respostas/{idResposta}/remover(idPergunta=${pergunta.id}, idResposta=${r.id})}"><i
 											class="material-icons">delete_forever</i></a></td>
 								</tr>

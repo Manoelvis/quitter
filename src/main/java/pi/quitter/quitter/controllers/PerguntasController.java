@@ -26,7 +26,7 @@ public class PerguntasController {
 	private RespostaRepository rr;
 
 	@GetMapping("/form")
-	public String form() {
+	public String form(Pergunta pergunta) {
 		return "perguntas/formPergunta";
 	}
 
@@ -35,7 +35,7 @@ public class PerguntasController {
 
 		pr.save(pergunta);
 
-		return "perguntas/pergunta-adicionada";
+		return "redirect:/perguntas";
 	}
 
 	@GetMapping
@@ -48,7 +48,7 @@ public class PerguntasController {
 	}
 
 	@GetMapping("/{id}")
-	public ModelAndView detalhar(@PathVariable Long id) {
+	public ModelAndView detalhar(@PathVariable Long id, Resposta resposta) {
 
 		ModelAndView md = new ModelAndView();
 		Optional<Pergunta> opt = pr.findById(id);
@@ -85,6 +85,50 @@ public class PerguntasController {
 		rr.save(resposta);
 
 		return "redirect:/perguntas/{idPergunta}";
+	}
+
+	@GetMapping("/{id}/selecionar")
+	public ModelAndView selecionarPergunta(@PathVariable Long id) {
+		ModelAndView md = new ModelAndView();
+		Optional<Pergunta> opt = pr.findById(id);
+		if (opt.isEmpty()) {
+			md.setViewName("redirect:/perguntas");
+			return md;
+		}
+
+		Pergunta pergunta = opt.get();
+		md.setViewName("perguntas/formPergunta");
+		md.addObject("pergunta", pergunta);
+
+		return md;
+	}
+
+	@GetMapping("/{idPergunta}/respostas/{idResposta}/selecionar")
+	public ModelAndView selecionarResposta(@PathVariable Long idPergunta, @PathVariable Long idResposta) {
+		ModelAndView md = new ModelAndView();
+
+		Optional<Pergunta> optPergunta = pr.findById(idPergunta);
+		Optional<Resposta> optResposta = rr.findById(idResposta);
+
+		if (optPergunta.isEmpty() || optResposta.isEmpty()) {
+			md.setViewName("redirect:/perguntas");
+			return md;
+		}
+
+		Pergunta pergunta = optPergunta.get();
+		Resposta resposta = optResposta.get();
+
+		if (pergunta.getId() != resposta.getPergunta().getId()) {
+			md.setViewName("redirect:/perguntas");
+			return md;
+		}
+
+		md.setViewName("perguntas/detalhes");
+		md.addObject("resposta", resposta);
+		md.addObject("pergunta", pergunta);
+		md.addObject("respostas", rr.findByPergunta(pergunta));
+
+		return md;
 	}
 
 	@GetMapping("/{id}/remover")
