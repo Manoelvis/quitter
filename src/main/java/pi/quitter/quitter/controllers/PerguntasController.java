@@ -62,28 +62,43 @@ public class PerguntasController {
 		Pergunta pergunta = opt.get();
 
 		md.addObject("pergunta", pergunta);
-		
+
 		List<Resposta> repostas = rr.findByPergunta(pergunta);
 		md.addObject("respostas", repostas);
 
 		return md;
 	}
-	
+
 	@PostMapping("/{idPergunta}")
 	public String adicionarResposta(@PathVariable Long idPergunta, Resposta resposta) {
-		
+
 		Optional<Pergunta> opt = pr.findById(idPergunta);
-		
-		if(opt.isEmpty()) {
-			
+
+		if (opt.isEmpty()) {
+
 			return "redirect:/perguntas";
 		}
-		
+
 		Pergunta pergunta = opt.get();
 		resposta.setPergunta(pergunta);
-		
+
 		rr.save(resposta);
-		
+
 		return "redirect:/perguntas/{idPergunta}";
+	}
+
+	@GetMapping("/{id}/remover")
+	public String apagarPergunta(@PathVariable Long id) {
+
+		Optional<Pergunta> opt = pr.findById(id);
+
+		if (!opt.isEmpty()) {
+			Pergunta pergunta = opt.get();
+			List<Resposta> respostas = rr.findByPergunta(pergunta);
+			rr.deleteAll(respostas);
+			pr.delete(pergunta);
+		}
+
+		return "redirect:/perguntas";
 	}
 }
