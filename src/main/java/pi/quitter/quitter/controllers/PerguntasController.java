@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.validation.Valid;
 import pi.quitter.quitter.models.Pergunta;
@@ -33,13 +34,14 @@ public class PerguntasController {
 	}
 
 	@PostMapping
-	public String adicionarPergunta(@Valid Pergunta pergunta, BindingResult result) {
+	public String adicionarPergunta(@Valid Pergunta pergunta, BindingResult result, RedirectAttributes attributes) {
 
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			return form(pergunta);
 		}
-		
+
 		pr.save(pergunta);
+		attributes.addFlashAttribute("mensagem", "Pergunta criada!");
 
 		return "redirect:/perguntas";
 	}
@@ -76,7 +78,7 @@ public class PerguntasController {
 	}
 
 	@PostMapping("/{idPergunta}")
-	public String adicionarResposta(@PathVariable Long idPergunta, @Valid Resposta resposta, BindingResult result) {
+	public String adicionarResposta(@PathVariable Long idPergunta, @Valid Resposta resposta, BindingResult result, RedirectAttributes attributes) {
 
 		Optional<Pergunta> opt = pr.findById(idPergunta);
 
@@ -88,11 +90,12 @@ public class PerguntasController {
 		Pergunta pergunta = opt.get();
 		resposta.setPergunta(pergunta);
 
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			return "redirect:/perguntas/{idPergunta}";
 		}
-		
+
 		rr.save(resposta);
+		attributes.addFlashAttribute("mensagem", "Comentário adicionado!");
 
 		return "redirect:/perguntas/{idPergunta}";
 	}
@@ -142,7 +145,7 @@ public class PerguntasController {
 	}
 
 	@GetMapping("/{id}/remover")
-	public String apagarPergunta(@PathVariable Long id) {
+	public String apagarPergunta(@PathVariable Long id, RedirectAttributes attributes) {
 
 		Optional<Pergunta> opt = pr.findById(id);
 
@@ -151,19 +154,21 @@ public class PerguntasController {
 			List<Resposta> respostas = rr.findByPergunta(pergunta);
 			rr.deleteAll(respostas);
 			pr.delete(pergunta);
+			attributes.addFlashAttribute("mensagem", "Pergunta removida!");
 		}
 
 		return "redirect:/perguntas";
 	}
 
 	@GetMapping("/{idPergunta}/respostas/{idResposta}/remover")
-	public String apagarResposta(@PathVariable Long idPergunta, @PathVariable Long idResposta) {
+	public String apagarResposta(@PathVariable Long idPergunta, @PathVariable Long idResposta, RedirectAttributes attributes) {
 
 		Optional<Resposta> opt = rr.findById(idResposta);
 
 		if (!opt.isEmpty()) {
 			Resposta resposta = opt.get();
 			rr.delete(resposta);
+			attributes.addFlashAttribute("mensagem", "Comentário removido!");
 		}
 
 		return "redirect:/perguntas/{idPergunta}";
