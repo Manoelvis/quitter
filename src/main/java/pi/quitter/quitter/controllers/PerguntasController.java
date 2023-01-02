@@ -101,4 +101,17 @@ public class PerguntasController {
 
 		return "redirect:/perguntas";
 	}
+
+	@GetMapping("/{idPergunta}/respostas/{idResposta}/remover")
+	public String apagarResposta(@PathVariable Long idPergunta, @PathVariable Long idResposta) {
+
+		Optional<Resposta> opt = rr.findById(idResposta);
+
+		if (!opt.isEmpty()) {
+			Resposta resposta = opt.get();
+			rr.delete(resposta);
+		}
+
+		return "redirect:/perguntas/{idPergunta}";
+	}
 }

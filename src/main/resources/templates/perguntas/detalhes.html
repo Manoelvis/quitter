@@ -2,8 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+
 <title>Detalhes</title>
 </head>
 <body>
@@ -54,12 +58,16 @@
 								<tr>
 									<th>Comentário</th>
 									<th>Usuário</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="r : ${respostas}">
 									<td th:text="${r.comentario}">Comentário</td>
 									<td>Nome do Usuário</td>
+									<td><a
+										th:href="@{/perguntas/{idPergunta}/respostas/{idResposta}/remover(idPergunta=${pergunta.id}, idResposta=${r.id})}"><i
+											class="material-icons">delete_forever</i></a></td>
 								</tr>
 							</tbody>
 						</table>
