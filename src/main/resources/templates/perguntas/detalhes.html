@@ -35,14 +35,13 @@
 						<span class="card-title">Adicionar um comentário:</span>
 						<form
 							th:action="@{/perguntas/{idPergunta}(idPergunta=${pergunta.id})}"
-							method="post">
+							method="post" th:object="${resposta}">
 							<div>
-								<input type="hidden" name="id" th:value="${resposta.id}"
-									readonly="readonly">
+								<input type="hidden" th:field="*{id}" readonly="readonly">
 							</div>
 							<div>
-								<input type="text" name="comentario"
-									th:value="${resposta.comentario}">
+								<input type="text" th:field="*{comentario}">
+								<p th:errors="*{comentario}"></p>
 							</div>
 							<div>
 								<button

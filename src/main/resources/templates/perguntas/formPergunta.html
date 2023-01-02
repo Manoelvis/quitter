@@ -12,18 +12,19 @@
 
 		<h5>Adicione sua dúvida aqui.</h5>
 
-		<form action="/perguntas" method="post">
+		<form action="/perguntas" method="post" th:object="${pergunta}">
 			<div>
-				<input type="hidden" name="id" th:value="${pergunta.id}"
-					readonly="readonly">
+				<input type="hidden" th:field="*{id}" readonly="readonly">
 			</div>
 			<div>
 				<label class="black-text"><h6>Dúvida:</h6></label> <input
-					type="text" name="duvida" th:value="${pergunta.duvida}">
+					type="text" th:field="*{duvida}">
+				<p th:errors="*{duvida}"></p>
 			</div>
 			<div>
 				<label class="black-text"><h6>Descrição da Dúvida:</h6></label> <input
-					type="text" name="descricao" th:value="${pergunta.descricao}">
+					type="text" th:field="*{descricao}">
+				<p th:errors="*{descricao}"></p>
 			</div>
 			<div>
 				<button class="light-green darken-4 waves-effect waves-light btn"

@@ -5,12 +5,14 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import jakarta.validation.Valid;
 import pi.quitter.quitter.models.Pergunta;
 import pi.quitter.quitter.models.Resposta;
 import pi.quitter.quitter.repositories.PerguntaRepository;
@@ -31,8 +33,12 @@ public class PerguntasController {
 	}
 
 	@PostMapping
-	public String adicionarPergunta(Pergunta pergunta) {
+	public String adicionarPergunta(@Valid Pergunta pergunta, BindingResult result) {
 
+		if(result.hasErrors()) {
+			return form(pergunta);
+		}
+		
 		pr.save(pergunta);
 
 		return "redirect:/perguntas";
@@ -70,7 +76,7 @@ public class PerguntasController {
 	}
 
 	@PostMapping("/{idPergunta}")
-	public String adicionarResposta(@PathVariable Long idPergunta, Resposta resposta) {
+	public String adicionarResposta(@PathVariable Long idPergunta, @Valid Resposta resposta, BindingResult result) {
 
 		Optional<Pergunta> opt = pr.findById(idPergunta);
 
@@ -82,6 +88,10 @@ public class PerguntasController {
 		Pergunta pergunta = opt.get();
 		resposta.setPergunta(pergunta);
 
+		if(result.hasErrors()) {
+			return "redirect:/perguntas/{idPergunta}";
+		}
+		
 		rr.save(resposta);
 
 		return "redirect:/perguntas/{idPergunta}";
