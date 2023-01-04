@@ -11,10 +11,11 @@
 		<div class="nav-wrapper container">
 			<a href="/" class="brand-logo yellow-text">Quitter</a>
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
-				<li><a href="/perguntas/form">Criar pergunta</a></li>
-				<li><a href="/perguntas" class="white green-text">Lista de
+				<li><a th:href="@{/perguntas/form}">Criar pergunta</a></li>
+				<li><a th:href="@{/perguntas}" class="white green-text">Lista de
 						perguntas</a></li>
-				<li><a href="/login">Login</a></li>
+				<li><a th:href="@{/login}">Login</a></li>
+				<li><a th:href="@{/admin/usuarios}">Lista de Usuários</a></li>
 			</ul>
 		</div>
 	</nav>
