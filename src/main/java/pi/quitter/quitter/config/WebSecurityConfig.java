@@ -8,9 +8,19 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class WebSecurityConfig {
 
+	@SuppressWarnings("deprecation")
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http
+		http.
+		authorizeRequests()
+		.requestMatchers("/").permitAll()
+		.requestMatchers("/perguntas").permitAll()
+		.requestMatchers("/user/**").hasRole("USER")
+		.requestMatchers("/ava/**").hasRole("AVALIADOR")
+		.requestMatchers("/admin/**").hasRole("ADMIN")
+		.anyRequest()
+		.authenticated()
+	.and()
 		.formLogin()
 			.loginPage("/login")
 			.permitAll()
