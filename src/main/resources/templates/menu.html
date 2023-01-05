@@ -20,6 +20,8 @@
 				<li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
 				<li sec:authorize="hasRole('ROLE_ADMIN')"><a
 					th:href="@{/admin/usuarios}">Lista de Usuários</a></li>
+				<li sec:authorize="!isAuthenticated()"><a href="#"
+					th:href="@{/cadastro}">Cadastre-se</a></li>
 				<li sec:authorize="isAuthenticated()">
 					<form action="/logout" method="post">
 						<button type="submit">Sair</button>

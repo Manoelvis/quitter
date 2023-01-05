@@ -71,7 +71,7 @@ public class Usuario implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return this.roles;
 	}
-	
+
 	@Override
 	public String getPassword() {
 		return this.senha;
@@ -100,5 +100,11 @@ public class Usuario implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nome=" + nome + ", matricula=" + matricula + ", senha=" + senha + ", roles="
+				+ roles + "]";
 	}
 }

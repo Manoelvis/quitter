@@ -2,6 +2,7 @@ package pi.quitter.quitter.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -15,6 +16,8 @@ public class WebSecurityConfig {
 		authorizeRequests()
 		.requestMatchers("/").permitAll()
 		.requestMatchers("/perguntas").permitAll()
+		.requestMatchers(HttpMethod.GET, "/cadastro").permitAll()
+		.requestMatchers(HttpMethod.POST, "/cadastro").permitAll()
 		.requestMatchers("/user/**").hasRole("USUARIO")
 		.requestMatchers("/ava/**").hasRole("AVALIADOR")
 		.requestMatchers("/admin/**").hasRole("ADMIN")
