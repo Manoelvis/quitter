@@ -15,7 +15,7 @@ public class WebSecurityConfig {
 		authorizeRequests()
 		.requestMatchers("/").permitAll()
 		.requestMatchers("/perguntas").permitAll()
-		.requestMatchers("/user/**").hasRole("USER")
+		.requestMatchers("/user/**").hasRole("USUARIO")
 		.requestMatchers("/ava/**").hasRole("AVALIADOR")
 		.requestMatchers("/admin/**").hasRole("ADMIN")
 		.anyRequest()
