@@ -8,16 +8,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class InMemoryConfiguration {
 
 	public void configureGlobal(AuthenticationManagerBuilder builder) throws Exception{
-		BCryptPasswordEncoder encoder = passwordEncoder();
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
 			builder
 					.inMemoryAuthentication()
 					.withUser("joao").password(encoder.encode("123")).roles("ADMIN", "USER")
 					.and()
 					.withUser("jose").password(encoder.encode("123")).roles("USER", "AVALIADOR");
-	}
-	
-	public BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
 	}
 }
