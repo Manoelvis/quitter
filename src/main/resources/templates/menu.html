@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -11,11 +13,20 @@
 		<div class="nav-wrapper container">
 			<a href="/" class="brand-logo yellow-text">Quitter</a>
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
-				<li><a th:href="@{/perguntas/form}">Criar pergunta</a></li>
-				<li><a th:href="@{/perguntas}" class="white green-text">Lista de
-						perguntas</a></li>
-				<li><a th:href="@{/login}">Login</a></li>
-				<li><a th:href="@{/admin/usuarios}">Lista de Usuários</a></li>
+				<li sec:authorize="hasRole('ROLE_USER')"><a
+					th:href="@{/perguntas/form}">Criar pergunta</a></li>
+				<li><a th:href="@{/perguntas}" class="white green-text">Lista
+						de perguntas</a></li>
+				<li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
+				<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+					th:href="@{/admin/usuarios}">Lista de Usuários</a></li>
+				<li sec:authorize="isAuthenticated()">
+					<form action="/logout" method="post">
+						<button type="submit">Sair</button>
+						<input type="hidden" th:name="${_csrf.parameterName}"
+							th:value="${_csrf.token}" />
+					</form>
+				</li>
 			</ul>
 		</div>
 	</nav>
