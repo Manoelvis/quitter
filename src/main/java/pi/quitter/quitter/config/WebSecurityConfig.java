@@ -14,8 +14,6 @@ public class WebSecurityConfig {
 		http.
 		authorizeRequests()
 		.requestMatchers("/").permitAll()
-		.requestMatchers("/perguntas").permitAll()
-		.requestMatchers("/cadastro").permitAll()
 		.requestMatchers("/user/**").hasRole("USUARIO")
 		.requestMatchers("/ava/**").hasRole("AVALIADOR")
 		.requestMatchers("/admin/**").hasRole("ADMIN")
