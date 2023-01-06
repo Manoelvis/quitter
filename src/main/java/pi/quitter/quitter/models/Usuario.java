@@ -3,6 +3,8 @@ package pi.quitter.quitter.models;
 import java.util.Collection;
 import java.util.List;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -25,6 +27,7 @@ public class Usuario implements UserDetails {
 	private String senha;
 
 	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	public List<Role> roles;
 
 	public Long getId() {
