@@ -13,7 +13,7 @@ public class WebSecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.
 		authorizeRequests()
-		.requestMatchers("/").permitAll()
+		.requestMatchers("/*").permitAll()
 		.requestMatchers("/user/**").hasRole("USUARIO")
 		.requestMatchers("/ava/**").hasRole("AVALIADOR")
 		.requestMatchers("/admin/**").hasRole("ADMIN")
