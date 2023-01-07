@@ -8,4 +8,5 @@ import pi.quitter.quitter.models.Role;
 @Controller
 public interface RoleRepository extends CrudRepository<Role, Long>{
 
+	Role findByNome(String nome);
 }
