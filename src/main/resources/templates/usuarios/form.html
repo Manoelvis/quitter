@@ -12,36 +12,70 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta charset="UTF-8">
-<title>Cadastre-se</title>
+<title>Edição</title>
 </head>
 <body>
+
 	<div th:replace="~{menu :: menu-quitter}"></div>
 
 	<div class="container">
-		<h1>Cadastre-se</h1>
-
-		<form action="/cadastro" method="post">
-			<div class="row">
-				<div class="col-12">
-					<label>Nome completo</label> <input type="text" name="nome">
-				</div>
+		<div class="row">
+			<div>
+				<h3>Editar papéis do usuário</h3>
 			</div>
-			<div class="row">
-				<div class="col-12">
-					<label>Matricula</label> <input type="number" name="matricula">
+		</div>
+		<div class="row">
+			<form action="#"
+				th:action="@{/admin/usuarios/{id}(id=${usuario.id})}"
+				th:object="${usuario}" method="post">
+				<input type="hidden" th:field="${id}">
+				<blockquote>
+					<div class="row">
+						<div class="col s2">Nome:</div>
+						<div class="col s10">
+							<span th:text="${usuario.nome}"></span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s2">Matrícula:</div>
+						<div class="col s10">
+							<span th:text="${usuario.matricula}"></span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s2">Email:</div>
+						<div class="col s10">
+							<span th:text="${usuario.email}"></span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s2">Papeis:</div>
+						<div class="col s10">
+							<div th:each="papel : ${papeis}">
+								<label> <input type="checkbox" th:field="*{roles}"
+									th:value="${papel.id}" /> <span th:text="${papel.nome}">Heating</span>
+								</label>
+							</div>
+						</div>
+					</div>
+				</blockquote>
+				<div class="row">
+					<div class="col">
+						<button class="btn" type="submit">Salvar</button>
+					</div>
+					<div class="col">
+						<a class="btn" th:href="@{/admin/usuarios}">Cancelar</a>
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-12">
-					<label>Senha</label> <input type="password" name="senha">
-				</div>
-			</div>
-
-			<button class="light-green darken-4 waves-effect waves-light btn" type="submit">Cadastrar</button>
-			<button class="red darken-4 waves-effect waves-light btn" type="reset">Limpar Campos</button>
-			<input type="hidden" th:name="${_csrf.parameterName}"
-				th:value="${_csrf.token}" />
-		</form>
+			</form>
+		</div>
 	</div>
+
+	<div th:replace="~{fragments/commons :: rodape}"></div>
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
 </body>
 </html>
