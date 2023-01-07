@@ -9,4 +9,6 @@ import pi.quitter.quitter.models.Role;
 public interface RoleRepository extends CrudRepository<Role, Long>{
 
 	Role findByNome(String nome);
+	
+	Iterable<Role> findAllByOrderByNomeAsc();
 }
