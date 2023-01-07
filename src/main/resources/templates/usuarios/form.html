@@ -51,10 +51,13 @@
 					<div class="row">
 						<div class="col s2">Papeis:</div>
 						<div class="col s10">
-							<div th:each="papel : ${papeis}">
-								<label> <input type="checkbox" th:field="*{roles}"
-									th:value="${papel.id}" /> <span th:text="${papel.nome}">Heating</span>
-								</label>
+							<div th:each="papel : ${papeis}" class="switch">
+								<div class="row">
+									<label> <input type="checkbox" th:field="*{roles}"
+										th:value="${papel.id}" /><span class="lever"></span> <span
+										th:text="${papel.nome}"></span>
+									</label>
+								</div>
 							</div>
 						</div>
 					</div>
