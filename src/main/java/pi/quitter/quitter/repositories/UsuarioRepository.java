@@ -10,5 +10,5 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Long>{
 
 	Usuario findByMatricula(String matricula);
 
-	Iterable<Usuario> findAllByNomeContaining(String filter);
+	Iterable<Usuario> findAllByNomeContaining(String nome);
 }
