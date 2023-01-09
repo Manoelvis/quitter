@@ -18,7 +18,7 @@
 
 		<h5>Adicione sua dúvida aqui.</h5>
 
-		<form action="/perguntas" method="post" th:object="${pergunta}">
+		<form action="#" th:action="@{/perguntas}" method="post" th:object="${pergunta}">
 			<div>
 				<input type="hidden" th:field="*{id}" readonly="readonly">
 			</div>

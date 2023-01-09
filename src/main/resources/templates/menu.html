@@ -17,13 +17,12 @@
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
 				<li sec:authorize="hasRole('ROLE_USUARIO')"><a
 					th:href="@{/perguntas/form}">Criar pergunta</a></li>
-				<li><a th:href="@{/perguntas}">Lista
-						de perguntas</a></li>
-				<li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
+				<li><a th:href="@{/perguntas}">Lista de perguntas</a></li>
 				<li sec:authorize="hasRole('ROLE_ADMIN')"><a
 					th:href="@{/admin/usuarios}">Lista de Usuários</a></li>
 				<li sec:authorize="!isAuthenticated()"><a href="#"
 					th:href="@{/cadastro}">Cadastre-se</a></li>
+				<li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
 				<li class="right" sec:authorize="isAuthenticated()">
 					<form action="/logout" method="post">
 						<button class="light-green darken-4 waves-effect waves-light btn"
