@@ -23,6 +23,7 @@ public class AdminController {
 	@Autowired
 	RoleRepository rr;
 	
+	@GetMapping("/usuarios")
 	public ModelAndView listaUsuarios(String filter) {
 
 		if (filter == null)

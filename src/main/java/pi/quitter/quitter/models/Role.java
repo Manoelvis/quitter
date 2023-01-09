@@ -1,11 +1,11 @@
 package pi.quitter.quitter.models;
 
+import javax.persistence.Id;
+
 import org.springframework.security.core.GrantedAuthority;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 
-@Entity
+@javax.persistence.Entity
 public class Role implements GrantedAuthority {
 
 	private static final long serialVersionUID = -1149259983254260718L;

@@ -1,22 +1,20 @@
 package pi.quitter.quitter.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
-public class WebSecurityConfig {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
-	@SuppressWarnings("deprecation")
-	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	@Override
+	public void configure(HttpSecurity http) throws Exception {
 		http.
 		authorizeRequests()
-		.requestMatchers("/*").permitAll()
-		.requestMatchers("/user/**").hasRole("USUARIO")
-		.requestMatchers("/ava/**").hasRole("AVALIADOR")
-		.requestMatchers("/admin/**").hasRole("ADMIN")
+		.antMatchers("/*").permitAll()
+		.antMatchers("/user/**").hasRole("USUARIO")
+		.antMatchers("/ava/**").hasRole("AVALIADOR")
+		.antMatchers("/admin/**").hasRole("ADMIN")
 		.anyRequest()
 		.authenticated()
 	.and()
@@ -27,6 +25,5 @@ public class WebSecurityConfig {
 		.logout()
 			.logoutSuccessUrl("/login?logout")
 			.permitAll();
-		return null;
 	}
 }

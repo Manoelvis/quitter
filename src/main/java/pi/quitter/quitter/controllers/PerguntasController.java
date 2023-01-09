@@ -3,6 +3,8 @@ package pi.quitter.quitter.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import jakarta.validation.Valid;
+
 import pi.quitter.quitter.models.Pergunta;
 import pi.quitter.quitter.models.Resposta;
+import pi.quitter.quitter.models.Usuario;
 import pi.quitter.quitter.repositories.PerguntaRepository;
 import pi.quitter.quitter.repositories.RespostaRepository;
+import pi.quitter.quitter.repositories.UsuarioRepository;
 
 @Controller
 @RequestMapping("/perguntas")
@@ -27,6 +31,8 @@ public class PerguntasController {
 	private PerguntaRepository pr;
 	@Autowired
 	private RespostaRepository rr;
+	@Autowired
+	private UsuarioRepository ur;
 
 	@GetMapping("/form")
 	public String form(Pergunta pergunta) {
@@ -34,12 +40,17 @@ public class PerguntasController {
 	}
 
 	@PostMapping
-	public String adicionarPergunta(@Valid Pergunta pergunta, BindingResult result, RedirectAttributes attributes) {
+	public String adicionarPergunta(@PathVariable Long idUsuario, @Valid Pergunta pergunta, BindingResult result, RedirectAttributes attributes) {
 
 		if (result.hasErrors()) {
 			return form(pergunta);
 		}
 
+		Optional<Usuario> opt = ur.findById(idUsuario);
+		
+		Usuario usuario = opt.get();
+		pergunta.setUsuario(usuario);
+		
 		pr.save(pergunta);
 		attributes.addFlashAttribute("mensagem", "Pergunta criada!");
 

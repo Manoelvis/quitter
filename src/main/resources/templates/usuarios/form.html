@@ -18,25 +18,29 @@
 	<div th:replace="~{menu :: menu-quitter}"></div>
 	<div class="container">
 		<h1>Cadastre-se</h1>
-		<form action="/cadastro" method="post">
+		<form action="/cadastro" method="post" th:object="${usuario}">
 			<div class="row">
 				<div class="col-12">
-					<label>Nome completo</label> <input type="text" name="nome">
+					<label>Nome completo</label> <input type="text" th:field="*{nome}">
+					<p th:errors="*{nome}"></p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-12">
-					<label>Matricula</label> <input type="number" name="matricula">
+					<label>Matricula</label> <input type="number" th:field="*{matricula}">
+					<p th:errors="*{matricula}"></p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-12">
-					<label>Email</label> <input type="text" name="email">
+					<label>Email</label> <input type="text" th:field="*{email}">
+					<p th:errors="*{email}"></p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-12">
-					<label>Senha</label> <input type="password" name="senha">
+					<label>Senha</label> <input type="password" th:field="*{senha}">
+					<p th:errors="*{senha}"></p>
 				</div>
 			</div>
 			<div class="row">
