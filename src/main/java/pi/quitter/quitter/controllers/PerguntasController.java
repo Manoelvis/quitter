@@ -18,8 +18,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pi.quitter.quitter.models.Pergunta;
 import pi.quitter.quitter.models.Resposta;
+import pi.quitter.quitter.models.Usuario;
 import pi.quitter.quitter.repositories.PerguntaRepository;
 import pi.quitter.quitter.repositories.RespostaRepository;
+import pi.quitter.quitter.repositories.UsuarioRepository;
 
 @Controller
 @RequestMapping("/perguntas")
@@ -29,6 +31,8 @@ public class PerguntasController {
 	private PerguntaRepository pr;
 	@Autowired
 	private RespostaRepository rr;
+	
+	private UsuarioRepository ur;
 
 	@GetMapping("/form")
 	public String form(Pergunta pergunta) {
@@ -36,8 +40,18 @@ public class PerguntasController {
 	}
 
 	@PostMapping
-	public String adicionarPergunta(@Valid Pergunta pergunta, BindingResult result, RedirectAttributes attributes) {
+	public String adicionarPergunta(@PathVariable Long idUsuario, @Valid Pergunta pergunta, BindingResult result, RedirectAttributes attributes) {
 
+		Optional<Usuario> opt = ur.findById(idUsuario);
+		
+		if (opt.isEmpty()) {
+
+			return "redirect:/perguntas";
+		}
+		
+		Usuario usuario = opt.get();
+		pergunta.setUsuario(usuario);
+		
 		if (result.hasErrors()) {
 			return "redirect:/perguntas/form";
 		}

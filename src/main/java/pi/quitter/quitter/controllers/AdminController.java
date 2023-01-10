@@ -19,10 +19,10 @@ public class AdminController {
 
 	@Autowired
 	UsuarioRepository ur;
-	
+
 	@Autowired
 	RoleRepository rr;
-	
+
 	@GetMapping("/usuarios")
 	public ModelAndView listaUsuarios(String filter) {
 
@@ -36,7 +36,7 @@ public class AdminController {
 
 		return mv;
 	}
-	
+
 	@GetMapping("/usuarios/{id}")
 	public ModelAndView selecionaUsuario(@PathVariable("id") Long id) {
 		Usuario usuario = ur.findById(id).get();
@@ -48,16 +48,15 @@ public class AdminController {
 
 		return mv;
 	}
-	
+
 	@PostMapping("/usuarios/{id}")
 	public String salvarPapeisUsuario(Usuario usuarioForm) {
 
 		Usuario usuario = ur.findById(usuarioForm.getId()).get();
-		if(usuario == null) {
+		if (usuario == null) {
 			return "redirect:/admin/usuarios/";
 		}
 		usuario.setRoles(usuarioForm.getRoles());
-
 
 		System.out.println("Usuario form: " + usuarioForm);
 		System.out.println("Usuario editado: " + usuario);

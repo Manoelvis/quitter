@@ -9,11 +9,11 @@
 <meta charset="UTF-8">
 </head>
 <body>
-	<span sec:authorize="isAuthenticated()"
-		sec:authentication="principal.nome">Bob</span>
 	<nav th:fragment="menu-quitter" class="light-green darken-4">
 		<div class="nav-wrapper container">
 			<a href="/" class="brand-logo yellow-text">Quitter</a>
+			<span sec:authorize="isAuthenticated()"
+				sec:authentication="principal.nome"></span>
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
 				<li sec:authorize="hasRole('ROLE_USUARIO')"><a
 					th:href="@{/perguntas/form}">Criar pergunta</a></li>
