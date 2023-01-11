@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -17,17 +16,6 @@ public class Pergunta {
 	private String duvida;
 	@NotBlank
 	private String descricao;
-
-	@ManyToOne
-	private Usuario usuario;
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
 
 	public Long getId() {
 		return id;
@@ -55,6 +43,6 @@ public class Pergunta {
 
 	@Override
 	public String toString() {
-		return "Pergunta [id=" + id + ", duvida=" + duvida + ", descricao=" + descricao + ", usuario=" + usuario + "]";
+		return "Pergunta [id=" + id + ", duvida=" + duvida + ", descricao=" + descricao + "]";
 	}
 }

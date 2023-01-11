@@ -11,7 +11,7 @@
 <body>
 	<nav th:fragment="menu-quitter" class="light-green darken-4">
 		<div class="nav-wrapper container">
-			<a href="/" class="brand-logo yellow-text">Quitter</a>
+			<a href="/" class="brand-logo center yellow-text">Quitter</a>
 			<span sec:authorize="isAuthenticated()"
 				sec:authentication="principal.nome"></span>
 			<ul id="nav-mobile" class="right hide-on-med-and-down">

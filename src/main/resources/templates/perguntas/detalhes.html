@@ -66,14 +66,12 @@
 							<thead>
 								<tr>
 									<th>Comentário</th>
-									<th>Usuário</th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="r : ${respostas}">
 									<td th:text="${r.comentario}">Comentário</td>
-									<td>Nome do Usuário</td>
 									<td><a
 										th:href="@{/perguntas/{idPergunta}/respostas/{idResposta}/selecionar(idPergunta=${pergunta.id}, idResposta=${r.id})}"><i
 											class="material-icons">edit</i></a><a

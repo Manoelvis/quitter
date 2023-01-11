@@ -22,14 +22,12 @@
 		<table class="highlight">
 			<thead>
 				<tr>
-					<th>Usuário</th>
-					<th>Dúvida</th>
+					<th>Dúvidas</th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="p : ${perguntas}">
-					<td>Nome do Usuário</td>
 					<td><a th:href="@{/perguntas/{id}(id=${p.id})}"><span
 							th:text="${p.duvida}">Dúvida</span></a></td>
 					<td><a th:href="@{/perguntas/{id}/selecionar(id=${p.id})}"><i
